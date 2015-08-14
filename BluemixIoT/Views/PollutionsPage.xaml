@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+				xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+				x:Class="BluemixIoT.PollutionsPage"
+				xmlns:local="clr-namespace:BluemixIoT;assembly=BluemixIoT" Title="{Binding Title}">
+  <ContentPage.Padding>
+    <OnPlatform x:TypeArguments="Thickness">
+      <OnPlatform.iOS>
+        0, 20, 0, 20
+      </OnPlatform.iOS>
+      <OnPlatform.Android>
+        0, 0, 0, 20
+      </OnPlatform.Android>
+      <OnPlatform.WinPhone>
+        0, 0, 0, 20
+      </OnPlatform.WinPhone>
+    </OnPlatform>
+  </ContentPage.Padding>
+
+  <ScrollView>
+    <Grid BackgroundColor="White" HorizontalOptions="FillAndExpand"
+            Padding="0"
+            RowSpacing="0"
+            ColumnSpacing="0"
+            VerticalOptions="FillAndExpand">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"></RowDefinition>
+        <RowDefinition Height="*"></RowDefinition>
+        <RowDefinition Height="40"></RowDefinition>
+
+      </Grid.RowDefinitions>
+      <Label Grid.Row="0"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand"
+                FontFamily="{x:Static local:Theme.FontFamilyUltraLight}"
+                FontSize="{x:Static local:Theme.FontSizeLarge}"
+                TextColor="{x:Static local:Theme.PrimaryColor}"
+                Text="Offline Data" />
+    <local:ChartView Grid.Row="1" x:Name="ChartView" Data="{Binding Data}" ShowOverlay="{Binding IsBusy}"></local:ChartView>
+      <Button Grid.Row="2" WidthRequest="150" HorizontalOptions="Center"  BackgroundColor="{x:Static local:Theme.PrimaryColor}" TextColor="White" Text="Refresh"></Button>
+    </Grid>
+  </ScrollView>
+</ContentPage>

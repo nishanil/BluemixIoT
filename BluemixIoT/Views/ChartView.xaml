@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+				xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+				x:Class="BluemixIoT.ChartView"
+				xmlns:local="clr-namespace:BluemixIoT;assembly=BluemixIoT"
+             	xmlns:controls="clr-namespace:Infragistics.XF.Controls;assembly=InfragisticsXF.Controls.Charts">
+	<ContentView.Content>
+	<Grid Padding="0"
+          RowSpacing="0"
+          ColumnSpacing="0"
+          VerticalOptions="FillAndExpand">
+
+    <Grid.RowDefinitions>
+      <RowDefinition Height="20" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="20" />
+
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="20"></ColumnDefinition>
+      <ColumnDefinition Width="*"></ColumnDefinition>
+      <ColumnDefinition Width="20"></ColumnDefinition>
+    </Grid.ColumnDefinitions>
+    <controls:XFDataChart x:Name="chart"
+                    	  Grid.Row="1" Grid.Column="1"
+                    	  HorizontalZoomable="true" 
+                    	  VerticalZoomable="true" >
+      <controls:XFDataChart.Axes>
+        <controls:NumericYAxis x:Name="yAxis" IsLogarithmic="False" LabelFontFamily="{x:Static local:Theme.FontFamilyMedium}"
+                              LabelFontSize="{x:Static local:Theme.FontSizeMicro}" />
+        <controls:CategoryXAxis x:Name="xAxis" ItemsSource="{Binding}" Label="Timestamp" LabelFontFamily="{x:Static local:Theme.FontFamilyMedium}"
+                              LabelFontSize="{x:Static local:Theme.FontSizeXMicro}" />
+      </controls:XFDataChart.Axes>
+      <controls:XFDataChart.Series>
+        <controls:LineSeries ItemsSource="{Binding}"
+         						
+		                       	XAxis="{x:Reference xAxis}"
+		                       	YAxis="{x:Reference yAxis}"
+		                       	ValueMemberPath="Data.Ppm" />
+
+      </controls:XFDataChart.Series>
+    </controls:XFDataChart>
+    <Frame Grid.Row="1" Grid.Column="1"
+            x:Name="overlay"
+             BackgroundColor="#404040"
+             Opacity="{Binding OverlayOpacity}"
+             HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+      <Label x:Name="downloadingData"
+       		 FontFamily="{x:Static local:Theme.FontFamilyMedium}"
+             FontSize="{x:Static local:Theme.FontSizeMicro}"
+             TextColor="White"
+             Text="" />
+    </Frame>
+  </Grid>
+	</ContentView.Content>
+</ContentView>
